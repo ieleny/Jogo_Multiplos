@@ -9,8 +9,8 @@ class Tela:
     GREEN = (0, 255, 0)
     BLUE = (0, 0, 128)
 
-    X = 400
-    Y = 300
+    X = 500
+    Y = 500
 
     #Construtor
     def __init__(self):
@@ -30,13 +30,18 @@ class Tela:
             self.desenhaTelaInicial(TELA)
 
             for event in pygame.event.get():
+                print(event)
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
+                elif event.type == 5:
+                    self.desenhaJogo()
             pygame.display.update()
 
     #Função desenha elementos do Jogo
     def desenhaJogo(self):
+        pygame.quit()
+        sys.exit()
         print('teste')
 
     #Função desenha inicio do jogo
@@ -46,8 +51,12 @@ class Tela:
         font = pygame.font.Font('freesansbold.ttf', 32)
         text = font.render('Multiplos de 5', True, self.BLUE)
         textRect = text.get_rect()
-        textRect.center = (self.X // 2, self.Y // 4)
+        textRect.center = (self.X // 2.5, self.Y // 4)
         TELA.blit(text, textRect)
 
         #Buttons
-        text_to_button("play", self.GREEN, 150, 500, 100, 50)
+        pygame.draw.rect(TELA,self.BLUE,(self.X/3.5,self.Y/2.5,100,50))
+        text = font.render('Jogar', True, self.GREEN)
+        textRect = text.get_rect()
+        textRect.center = (self.X/2.6,self.Y/2.2)
+        TELA.blit(text, textRect)
