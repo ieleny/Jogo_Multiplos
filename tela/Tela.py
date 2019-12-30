@@ -50,4 +50,3 @@ class Tela:
         TELA.blit(text, textRect)
 
         #Buttons
-        text_to_button("play", self.GREEN, 150, 500, 100, 50)
