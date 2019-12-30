@@ -49,11 +49,13 @@ class Tela:
     def inicioJogo(self, event):
         #Verificar se a posição é do botão
         if self.botao.collidepoint(event.pos):
-            #self.TELA.fill(self.BRANCO)
-            print(event)
 
-        #Jogo()
-        #print(event.button)
+            jogo = Jogo(self.TELA, self.X, self.Y)
+            jogo.telaDoJogo()
+            self.TELA.fill(self.BRANCO)
+
+            #print(event)
+            #print(event.button)
 
     #Função desenha inicio do jogo
     def desenhaTelaInicial(self):
