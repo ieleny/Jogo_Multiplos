@@ -17,10 +17,6 @@ class Tela:
 
     TELA = pygame.display.set_mode((X, Y))
 
-    #Variaveis
-    #Define a variavel para definir o button, e de acordo que for clicado gerar a nova tela
-    botao = ''
-
     #Construtor
     def __init__(self):
         self.telaJogo()
@@ -32,7 +28,7 @@ class Tela:
 
         #TELA = pygame.display.set_mode((self.X, self.Y))
         self.TELA.fill(self.CINZA)
-        pygame.display.set_caption('Multiplos 5')
+        pygame.display.set_caption('Multiplos de 5')
 
         self.desenhaTelaInicial()
 
@@ -51,11 +47,8 @@ class Tela:
         if self.botao.collidepoint(event.pos):
 
             jogo = Jogo(self.TELA, self.X, self.Y)
-            jogo.telaDoJogo()
             self.TELA.fill(self.BRANCO)
-
-            #print(event)
-            #print(event.button)
+            jogo.telaDoJogo()
 
     #Função desenha inicio do jogo
     def desenhaTelaInicial(self):
