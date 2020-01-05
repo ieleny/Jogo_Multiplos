@@ -1,6 +1,6 @@
 import pygame, sys
 from pygame.locals import *
-
+from random import *
 
 class Jogo:
 
@@ -17,10 +17,11 @@ class Jogo:
 
         #Primeira Torre
         pygame.draw.rect(self.TELA, (0, 0, 0, 0), [100, 50, 150, 400])
-        self.gerarNumeros(170, 120, 50)
+        self.gerarBolasVertical(180, 120, 50)
 
         #Segunda Torre
         pygame.draw.rect(self.TELA, (0, 0, 0, 0), [400, 50, 150, 400])
+        self.gerarBolasVertical(480, 120, 50)
 
         #Terceira Torre
         pygame.draw.rect(self.TELA, (
@@ -28,15 +29,24 @@ class Jogo:
             0,
             0,
         ), [700, 50, 150, 400])
+        self.gerarBolasVertical(780, 120, 50)
 
         #Torre horizontal
         pygame.draw.rect(self.TELA, (0, 0, 0, 0), [100, 470, 750, 100])
+        self.gerarBolasHorizontal(190,520,40)
 
         pygame.display.flip()
 
-    def gerarNumeros(self, X, Y, diamentro):
+    def gerarBolasVertical(self, X, Y, diamentro):
 
         for item in range(3):
-            print(item)
             pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diamentro)
+            self.TELA.blit(pygame.font.SysFont('Comic Sans MS', 30).render(str(randrange(10)), False, (0, 0, 0)),(X,Y))
             Y += 120
+
+    def gerarBolasHorizontal(self, X, Y, diamentro):
+
+        for item in range(6):
+            pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diamentro)
+            self.TELA.blit(pygame.font.SysFont('Comic Sans MS', 30).render(str(randrange(10)), False, (0, 0, 0)),(X,Y))
+            X += 120

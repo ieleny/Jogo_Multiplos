@@ -43,9 +43,9 @@ class Tela:
 
     #Função desenha elementos do Jogo
     def inicioJogo(self, event):
+        
         #Verificar se a posição é do botão
         if self.botao.collidepoint(event.pos):
-
             jogo = Jogo(self.TELA, self.X, self.Y)
             self.TELA.fill(self.BRANCO)
             jogo.telaDoJogo()
