@@ -9,6 +9,6 @@ Dúvidas entre no site https://www.pygame.org/wiki/GettingStarted.
 
 # Objetivo
 
-O objetivo do Jogo é somar os numeros, e com o resultado descobri se o numero é multiplo de 5. Se for multiplo de 5 irá sumir da tela e ter uma pontuação.
+O objetivo do Jogo é somar os numeros, e com o resultado descobri se o numero é multiplo de 5. Se for multiplo de 5 irá sumir da tela e terá uma pontuação.
 
 # Pontuação
