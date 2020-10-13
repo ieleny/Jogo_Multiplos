@@ -2,6 +2,9 @@
 
 Jogo aonde voce precisa descobrir se o numero é multiplos ou não do numero conrrespondente.
 
+# Executar o projeto
+
+
 # Como funciona
 
 Para que fosse feito esse jogo, foi utilizado a bliblioteca pygame. Para instalar no seu projeto é preciso executar esse comando 'python -m pip install -U pygame' .
