@@ -4,6 +4,9 @@ Jogo aonde voce precisa descobrir se o numero é multiplos ou não do numero con
 
 # Executar o projeto
 
+sudo python3 get-pip.py
+pip install pygame
+python3 index.py
 
 # Como funciona
 
