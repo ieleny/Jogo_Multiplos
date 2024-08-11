@@ -1,12 +1,28 @@
 # Jogo_Multiplos
 
-Jogo aonde voce precisa descobrir se o numero é multiplos ou não do numero conrrespondente.
+Jogo aonde voce precisa descobrir se o numero é multiplos ou não do numero correspondente.
 
 # Executar o projeto
 
-sudo python3 get-pip.py
-pip install pygame
-python3 index.py
+# Executar o projeto linux
+Instalar o pyhton na máquina linux - versão 3
+```sudo python3 get-pip.py```
+
+Instalar o pygame:
+```pip install pygame```
+
+Executar o projeto:
+```python3 index.py```
+
+# Executar o projeto no Window
+
+Comandos serão executados dentro do projeto
+
+Instalar o pygame:
+```py -m pip install -U pygame```
+
+Executar o jogo:
+```py index.py```
 
 # Como funciona
 
