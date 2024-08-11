@@ -33,4 +33,40 @@ Dúvidas entre no site https://www.pygame.org/wiki/GettingStarted.
 
 O objetivo do Jogo é somar os numeros, e com o resultado descobri se o numero é multiplo de 5. Se for multiplo de 5 irá sumir da tela e terá uma pontuação.
 
+Teremos 3 colunas verticais:
+
+| Coluna 1 | Coluna 2 | Coluna 3 |
+| --- | ---- | ----|
+| 3   |  4   |  1  |
+|2    |  2   |    5|
+|1    | 2    |    7|
+
+Uma linha horizontal:
+| Linha horizontal  |
+| ---      |
+|2   4  5  |
+
+O usuário irá selecionar no máximo 3 números, a soma deles precisa dar um multiplo de 5.
+
+| Coluna 1 | Coluna 2 | Coluna 3 |
+| --- | ---- | ----|
+| (3)   |  4   |  1  |
+|2    |  2   |    5|
+|1    | 2    |    7|
+
+| Linha horizontal  |
+| ---               |
+|(2)   4  5 3 7       |
+
+O número 3 irá sumir, e o número 2 irá ter outro número
+
 # Pontuação
+
+A pontuação será calculada da seguinte forma:
+
+| Valor | Pontuação |
+| ---   | ----      |
+| 5     |  1        |
+| 10    |  2        |
+
+Será de acordo com a tábuada, qual o valor que irá calcular, que terá o valor igual a 5 na tábuada de 5, é o 1, essa será a pontução.
