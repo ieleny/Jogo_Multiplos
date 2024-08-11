@@ -26,7 +26,6 @@ class Tela:
 
         pygame.init()
 
-        #TELA = pygame.display.set_mode((self.X, self.Y))
         self.TELA.fill(self.CINZA)
         pygame.display.set_caption('Multiplos de 5')
 

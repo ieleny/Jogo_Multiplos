@@ -8,7 +8,6 @@ class Jogo:
     VERMELHO = (125, 0, 0)
 
     def __init__(self, TELA, X, Y):
-
         self.TELA = TELA
         self.X = X
         self.Y = Y
@@ -16,26 +15,27 @@ class Jogo:
     def telaDoJogo(self):
 
         #Primeira Torre
-        pygame.draw.rect(self.TELA, (0, 0, 0, 0), [100, 50, 150, 400])
-        self.gerarBolasVertical(180, 120, 50)
+        self.gerarTorresVerticais(100, 180)
 
         #Segunda Torre
-        pygame.draw.rect(self.TELA, (0, 0, 0, 0), [400, 50, 150, 400])
-        self.gerarBolasVertical(480, 120, 50)
+        self.gerarTorresVerticais(400, 480)
 
         #Terceira Torre
-        pygame.draw.rect(self.TELA, (
-            0,
-            0,
-            0,
-        ), [700, 50, 150, 400])
-        self.gerarBolasVertical(780, 120, 50)
+        self.gerarTorresVerticais(700, 780)
 
         #Torre horizontal
         pygame.draw.rect(self.TELA, (0, 0, 0, 0), [100, 470, 750, 100])
         self.gerarBolasHorizontal(190,520,40)
 
         pygame.display.flip()
+
+    def gerarTorresVerticais(self, X_RECT, X_BOLAS):
+        pygame.draw.rect(
+            self.TELA, 
+            (0, 0, 0, 0), 
+            [X_RECT, 50, 150, 400]
+        )
+        self.gerarBolasVertical(X_BOLAS, 120, 50)
 
     def gerarBolasVertical(self, X, Y, diametro):
 
@@ -50,7 +50,12 @@ class Jogo:
     def gerarBolasHorizontal(self, X, Y, diametro):
 
         for item in range(6):
-            pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diametro)
+            pygame.draw.circle(
+                self.TELA, 
+                self.VERMELHO, 
+                [X, Y], 
+                diametro
+            )
             self.TELA.blit(
                 pygame.font.SysFont('Comic Sans MS', 40).render(str(randrange(10)), False, (0, 0, 0)),
                 (X-10,Y-25)
