@@ -37,16 +37,22 @@ class Jogo:
 
         pygame.display.flip()
 
-    def gerarBolasVertical(self, X, Y, diamentro):
+    def gerarBolasVertical(self, X, Y, diametro):
 
         for item in range(3):
-            pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diamentro)
-            self.TELA.blit(pygame.font.SysFont('Comic Sans MS', 30).render(str(randrange(10)), False, (0, 0, 0)),(X,Y))
+            pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diametro)
+            self.TELA.blit(
+                pygame.font.SysFont('Comic Sans MS', 40).render(str(randrange(10)), False, (0, 0, 0)),
+                (X-10,Y-25)
+            )
             Y += 120
 
-    def gerarBolasHorizontal(self, X, Y, diamentro):
+    def gerarBolasHorizontal(self, X, Y, diametro):
 
         for item in range(6):
-            pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diamentro)
-            self.TELA.blit(pygame.font.SysFont('Comic Sans MS', 30).render(str(randrange(10)), False, (0, 0, 0)),(X,Y))
+            pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diametro)
+            self.TELA.blit(
+                pygame.font.SysFont('Comic Sans MS', 40).render(str(randrange(10)), False, (0, 0, 0)),
+                (X-10,Y-25)
+            )
             X += 120
