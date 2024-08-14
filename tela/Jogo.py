@@ -12,31 +12,33 @@ class Jogo:
 
     def telaDoJogo(self):
 
-        #Primeira Torre
+        # Primeira Torre
         self.gerarTorresVerticais(100, 180)
 
-        #Segunda Torre
+        # Segunda Torre
         self.gerarTorresVerticais(400, 480)
 
-        #Terceira Torre
+        # Terceira Torre
         self.gerarTorresVerticais(700, 780)
 
-        #Torre horizontal
+        # Torre horizontal
         pygame.draw.rect(self.TELA, (0, 0, 0, 0), [100, 470, 750, 100])
         self.gerarBolasHorizontal(190,520,40)
 
         pygame.display.flip()
 
     def gerarTorresVerticais(self, X_RECT, X_BOLAS):
+        
         pygame.draw.rect(
             self.TELA, 
             (0, 0, 0, 0), 
             [X_RECT, 50, 150, 400]
         )
+        
         self.gerarBolasVertical(X_BOLAS, 120, 50)
 
     def gerarBolasVertical(self, X, Y, diametro):
-
+        
         for item in range(3):
             pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diametro)
             self.TELA.blit(
@@ -46,7 +48,7 @@ class Jogo:
             Y += 120
 
     def gerarBolasHorizontal(self, X, Y, diametro):
-
+        
         for item in range(6):
             pygame.draw.circle(
                 self.TELA, 
