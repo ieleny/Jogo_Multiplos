@@ -1,11 +1,9 @@
 import pygame, sys
 from pygame.locals import *
 from random import *
+from .CoresModel import CoresModel
 
 class Jogo:
-
-    #Constante
-    VERMELHO = (125, 0, 0)
 
     def __init__(self, TELA, X, Y):
         self.TELA = TELA
