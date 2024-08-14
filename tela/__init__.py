@@ -1,2 +1,2 @@
-#Arquivo de criação de Namespaces
+# Arquivo de criação de Namespaces
 from .Tela import Tela
