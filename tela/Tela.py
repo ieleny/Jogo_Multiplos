@@ -2,14 +2,10 @@ import pygame, sys
 from pygame.locals import *
 from .Menu import Menu
 from .CoresModel import CoresModel
+from .TamanhoTela import TamanhoTela
 
 class Tela:
-
-    # Tamanho da tela
-    X = 1000
-    Y = 600
-
-    TELA = pygame.display.set_mode((X, Y))
+    TELA = pygame.display.set_mode((TamanhoTela.LARGURA_TELA, TamanhoTela.ALTURA_TELA))
 
     # Construtor
     def __init__(self):
@@ -23,7 +19,7 @@ class Tela:
         # Inicializar o jogo
         pygame.init()
 
-        menu = Menu(self.TELA, self.X, self.Y)
+        menu = Menu(self.TELA)
         
         # Adicionar cor na tela
         self.TELA.fill(CoresModel.CINZA)

@@ -1,14 +1,12 @@
-import pygame, sys
+import pygame
 from pygame.locals import *
 from random import *
 from .CoresModel import CoresModel
 
 class Jogo:
-
-    def __init__(self, TELA, X, Y):
+    
+    def __init__(self, TELA):
         self.TELA = TELA
-        self.X = X
-        self.Y = Y
 
     def telaDoJogo(self):
 
@@ -39,8 +37,11 @@ class Jogo:
 
     def gerarBolasVertical(self, X, Y, diametro):
         
-        for item in range(3):
-            pygame.draw.circle(self.TELA, self.VERMELHO, [X, Y], diametro)
+        for item in range(5):
+            # TODO: Quando clicar irá adicionar a bordar verde
+            pygame.draw.circle(self.TELA, CoresModel.VERDE, [X, Y], diametro + 5)
+            pygame.draw.circle(self.TELA, CoresModel.VERMELHO, [X, Y], diametro)
+
             self.TELA.blit(
                 pygame.font.SysFont('Comic Sans MS', 40).render(str(randrange(10)), False, (0, 0, 0)),
                 (X-10,Y-25)
@@ -52,7 +53,7 @@ class Jogo:
         for item in range(6):
             pygame.draw.circle(
                 self.TELA, 
-                self.VERMELHO, 
+                CoresModel.VERMELHO, 
                 [X, Y], 
                 diametro
             )

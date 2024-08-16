@@ -1,13 +1,12 @@
 import pygame
 from .Jogo import Jogo
 from .CoresModel import CoresModel
+from .TamanhoTela import TamanhoTela
 
 class Menu:
 
-    def __init__(self, TELA, X, Y):
+    def __init__(self, TELA):
         self.TELA = TELA
-        self.X = X
-        self.Y = Y
 
     #Função desenha inicio do jogo
     def desenhaTelaInicial(self):
@@ -15,7 +14,7 @@ class Menu:
         fonte = pygame.font.Font('freesansbold.ttf', 40)
         text = fonte.render('Multiplos de 5', True, CoresModel.AZUL)
         textRect = text.get_rect()
-        textRect.center = (self.X // 2, self.Y // 4)
+        textRect.center = (TamanhoTela.LARGURA_TELA // 2, TamanhoTela.ALTURA_TELA // 4)
         self.TELA.blit(text, textRect)
 
         # Botões
@@ -23,17 +22,25 @@ class Menu:
         self.botao = pygame.draw.rect(
                                        self.TELA, 
                                        CoresModel.AZUL,
-                                      (self.X // 3, self.Y // 2.5, 300, 70)
+                                      (TamanhoTela.LARGURA_TELA // 3, TamanhoTela.ALTURA_TELA // 2.5, 300, 70)
                                     )
         text = fonte_botao.render('Jogar', True, CoresModel.VERDE)
         textRect = text.get_rect()
-        textRect.center = (self.X // 2.1, self.Y // 2.2)
+        textRect.center = (TamanhoTela.LARGURA_TELA // 2.1, TamanhoTela.ALTURA_TELA // 2.2)
         self.TELA.blit(text, textRect)
 
     # Função desenha elementos do Jogo
     def inicioJogo(self, event):
         # Verifica se a posição é do botão
         if self.botao.collidepoint(event.pos):
-            jogo = Jogo(self.TELA, self.X, self.Y)
+            jogo = Jogo(self.TELA)
             self.TELA.fill(CoresModel.BRANCO)
             jogo.telaDoJogo()
+
+        # Verifica se a posição é do botão
+        # if self.botao.collidepoint(420):
+            # pygame.draw.rect(
+                                #self.TELA, 
+                                #CoresModel.AZUL,
+                               # (TamanhoTela.LARGURA_TELA // 3, TamanhoTela.ALTURA_TELA // 2.5, 300, 70)
+                            #)
