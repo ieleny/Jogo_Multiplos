@@ -36,11 +36,3 @@ class Menu:
             jogo = Jogo(self.TELA)
             self.TELA.fill(CoresModel.BRANCO)
             jogo.telaDoJogo()
-
-        # Verifica se a posição é do botão
-        # if self.botao.collidepoint(420):
-            # pygame.draw.rect(
-                                #self.TELA, 
-                                #CoresModel.AZUL,
-                               # (TamanhoTela.LARGURA_TELA // 3, TamanhoTela.ALTURA_TELA // 2.5, 300, 70)
-                            #)
