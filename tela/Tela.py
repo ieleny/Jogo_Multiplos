@@ -1,5 +1,7 @@
 import pygame, sys
 from pygame.locals import *
+
+from .Jogo import Jogo
 from .Menu import Menu
 from .CoresModel import CoresModel
 from .TamanhoTela import TamanhoTela
@@ -36,5 +38,8 @@ class Tela:
                 elif event.type == MOUSEBUTTONDOWN and clicouBotaoInicioJogo == False:
                     menu.inicioJogo(event)
                     clicouBotaoInicioJogo = True
+                elif event.type == MOUSEBUTTONDOWN:
+                    jogo = Jogo(self.TELA)
+                    jogo.cliqueBotao(event)
             pygame.display.update()
         
