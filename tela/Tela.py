@@ -40,6 +40,6 @@ class Tela:
                     clicouBotaoInicioJogo = True
                 elif event.type == MOUSEBUTTONDOWN:
                     jogo = Jogo(self.TELA)
-                    jogo.cliqueBotao(event)
+                    jogo.cliqueBolas(event)
             pygame.display.update()
         
