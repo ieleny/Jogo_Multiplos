@@ -7,25 +7,39 @@ from .ModeloTorresVerticais import ModeloTorresVerticais
 class Jogo:
 
     listaBolasClicaveis = []
-    ultimaBolaTorre = []
+    bolasVerticais = []
+
+    # Estudar raio e circuferência para saber qual o centro da bola
 
     def __init__(self, TELA):
         self.TELA = TELA
 
     def telaDoJogo(self):
 
-        # Primeira Torre
+        # Primeira torre vertical
         self.gerarTorresVerticais(100, 180)
 
-        # Segunda Torre
+        # Segunda torre vertical
         self.gerarTorresVerticais(400, 480)
 
-        # Terceira Torre
+        # Terceira torre vertical
         self.gerarTorresVerticais(700, 780)
 
         # Torre horizontal
         pygame.draw.rect(self.TELA, (0, 0, 0, 0), [100, 470, 750, 100])
         self.gerarBolasHorizontal(190,520,40)
+
+        # Texto de pontução
+        self.TELA.blit(
+            pygame.font.SysFont('Comic Sans MS', 40).render("Pontuação", False, (0, 0, 0)),
+            (700,100)
+        )
+
+        # Texto da soma dos valores
+        self.TELA.blit(
+            pygame.font.SysFont('Comic Sans MS', 40).render("Soma dos valores", False, (0, 0, 0)),
+            (700,200)
+        )
         
         pygame.display.update()
 
@@ -47,7 +61,7 @@ class Jogo:
 
             modeloTorresVerticais = ModeloTorresVerticais(1, NUMERO_ATUAL, X, Y)
 
-            self.ultimaBolaTorre.append(modeloTorresVerticais)
+            self.bolasVerticais.append(modeloTorresVerticais)
             self.listaBolasClicaveis.append(pygame.Rect(X, Y, 300, 300))
 
             pygame.draw.circle(self.TELA, CoresModel.VERMELHO, [X, Y], diametro)
@@ -75,40 +89,40 @@ class Jogo:
     def cliqueBolas(self, event):
             # Verifica se a posição é do botão
             if self.listaBolasClicaveis[2].collidepoint(event.pos):
-                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.ultimaBolaTorre[2].Altura, self.ultimaBolaTorre[2].Largura], 45)
+                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.bolasVerticais[2].Altura, self.bolasVerticais[2].Largura], 45)
                 pygame.draw.circle(
                     self.TELA, 
                     CoresModel.VERMELHO, 
-                    [self.ultimaBolaTorre[2].Altura, self.ultimaBolaTorre[2].Largura], 
+                    [self.bolasVerticais[2].Altura, self.bolasVerticais[2].Largura], 
                     40
                 )
                 self.TELA.blit(
-                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.ultimaBolaTorre[2].NumeroBola), False, (0, 0, 0)),
-                    (self.ultimaBolaTorre[2].Altura - 10, self.ultimaBolaTorre[2].Largura - 25)
+                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[2].NumeroBola), False, (0, 0, 0)),
+                    (self.bolasVerticais[2].Altura - 10, self.bolasVerticais[2].Largura - 25)
                 )
 
             if self.listaBolasClicaveis[5].collidepoint(event.pos):
-                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.ultimaBolaTorre[5].Altura, self.ultimaBolaTorre[5].Largura], 45)
+                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.bolasVerticais[5].Altura, self.bolasVerticais[5].Largura], 45)
                 pygame.draw.circle(
                     self.TELA, 
                     CoresModel.VERMELHO, 
-                    [self.ultimaBolaTorre[5].Altura, self.ultimaBolaTorre[5].Largura], 
+                    [self.bolasVerticais[5].Altura, self.bolasVerticais[5].Largura], 
                     40
                 )
                 self.TELA.blit(
-                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.ultimaBolaTorre[5].NumeroBola), False, (0, 0, 0)),
-                    (self.ultimaBolaTorre[5].Altura - 10, self.ultimaBolaTorre[5].Largura - 25)
+                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[5].NumeroBola), False, (0, 0, 0)),
+                    (self.bolasVerticais[5].Altura - 10, self.bolasVerticais[5].Largura - 25)
                 )
             
             if self.listaBolasClicaveis[8].collidepoint(event.pos):
-                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.ultimaBolaTorre[8].Altura, self.ultimaBolaTorre[8].Largura], 45)
+                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.bolasVerticais[8].Altura, self.bolasVerticais[8].Largura], 45)
                 pygame.draw.circle(
                     self.TELA, 
                     CoresModel.VERMELHO, 
-                    [self.ultimaBolaTorre[8].Altura, self.ultimaBolaTorre[8].Largura], 
+                    [self.bolasVerticais[8].Altura, self.bolasVerticais[8].Largura], 
                     40
                 )
                 self.TELA.blit(
-                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.ultimaBolaTorre[8].NumeroBola), False, (0, 0, 0)),
-                    (self.ultimaBolaTorre[8].Altura - 10, self.ultimaBolaTorre[8].Largura - 25)
+                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[8].NumeroBola), False, (0, 0, 0)),
+                    (self.bolasVerticais[8].Altura - 10, self.bolasVerticais[8].Largura - 25)
                 )
