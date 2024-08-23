@@ -2,10 +2,11 @@ import pygame
 from pygame.locals import *
 from random import *
 from .CoresModel import CoresModel
+from .ModeloTorresVerticais import ModeloTorresVerticais
 
 class Jogo:
 
-    bola_um = pygame.Rect(780, 240, 300, 300)
+    listaBolasClicaveis = []
     ultimaBolaTorre = []
 
     def __init__(self, TELA):
@@ -26,7 +27,7 @@ class Jogo:
         pygame.draw.rect(self.TELA, (0, 0, 0, 0), [100, 470, 750, 100])
         self.gerarBolasHorizontal(190,520,40)
         
-        pygame.display.flip()
+        pygame.display.update()
 
     def gerarTorresVerticais(self, X_RECT, X_BOLAS):
         
@@ -43,7 +44,11 @@ class Jogo:
         for item in range(3):
 
             NUMERO_ATUAL = str(randrange(10))
-            self.ultimaBolaTorre.append(NUMERO_ATUAL)
+
+            modeloTorresVerticais = ModeloTorresVerticais(1, NUMERO_ATUAL, X, Y)
+
+            self.ultimaBolaTorre.append(modeloTorresVerticais)
+            self.listaBolasClicaveis.append(pygame.Rect(X, Y, 300, 300))
 
             pygame.draw.circle(self.TELA, CoresModel.VERMELHO, [X, Y], diametro)
             self.TELA.blit(
@@ -68,10 +73,12 @@ class Jogo:
             X += 120
 
     def cliqueBolas(self, event):
-        # Verifica se a posição é do botão
-        if self.bola_um.collidepoint(event.pos):
-            # TODO: Quando clicar irá adicionar a bordar verde
-            pygame.draw.circle(self.TELA, CoresModel.VERDE, [780, 360], 55)
-            pygame.draw.circle(self.TELA, CoresModel.VERMELHO, [400, 480], 40)
+        for item in range(9):
+            # Verifica se a posição é do botão
+            if self.listaBolasClicaveis[item].collidepoint(event.pos):
+                # Transformar em um dicionário
+                print(self.ultimaBolaTorre[item].Largura, self.ultimaBolaTorre[item].Altura)
 
-            print(self.ultimaBolaTorre)
+                # TODO: Quando clicar irá adicionar a borda verde
+                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.ultimaBolaTorre[item].Altura, self.ultimaBolaTorre[item].Largura], 55)
+                pygame.display.flip()
