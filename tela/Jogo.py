@@ -6,6 +6,7 @@ from .ModeloTorresVerticais import ModeloTorresVerticais
 
 class Jogo:
 
+    # Salvar os dados
     listaBolasClicaveis = []
     bolasVerticais = []
 
