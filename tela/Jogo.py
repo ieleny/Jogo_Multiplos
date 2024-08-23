@@ -10,6 +10,14 @@ class Jogo:
     listaBolasClicaveis = []
     bolasVerticais = []
 
+    # Eixos
+    dicionarioTorres =   { 
+                            'primeiraTorreVertical': { 'eixoXTorre': 100, 'eixoXBolas': 180 },
+                            'segundaTorreVertical':  { 'eixoXTorre': 330, 'eixoXBolas': 410 },
+                            'terceiraTorreVerical': { 'eixoXTorre': 560, 'eixoXBolas': 640 },
+                            'torreHorizontal': { 'eixoXTorre': 100, 'eixoXBolas': 190 }
+                        }
+
     # Estudar raio e circuferência para saber qual o centro da bola
 
     def __init__(self, TELA):
@@ -18,28 +26,40 @@ class Jogo:
     def telaDoJogo(self):
 
         # Primeira torre vertical
-        self.gerarTorresVerticais(100, 180)
+        self.gerarTorresVerticais(
+                                    self.dicionarioTorres['primeiraTorreVertical']['eixoXTorre'], 
+                                    self.dicionarioTorres['primeiraTorreVertical']['eixoXBolas']
+                                )
 
         # Segunda torre vertical
-        self.gerarTorresVerticais(400, 480)
+        self.gerarTorresVerticais(
+                                    self.dicionarioTorres['segundaTorreVertical']['eixoXTorre'], 
+                                    self.dicionarioTorres['segundaTorreVertical']['eixoXBolas']
+                                )
 
         # Terceira torre vertical
-        self.gerarTorresVerticais(700, 780)
+        self.gerarTorresVerticais(
+                                    self.dicionarioTorres['terceiraTorreVerical']['eixoXTorre'], 
+                                    self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas']
+                                )
 
         # Torre horizontal
-        pygame.draw.rect(self.TELA, (0, 0, 0, 0), [100, 470, 750, 100])
-        self.gerarBolasHorizontal(190,520,40)
+        self.gerarTorresHorizontais(  
+                                    self.dicionarioTorres['torreHorizontal']['eixoXTorre'], 
+                                    self.dicionarioTorres['torreHorizontal']['eixoXBolas']
+                                )
+
 
         # Texto de pontução
         self.TELA.blit(
-            pygame.font.SysFont('Comic Sans MS', 40).render("Pontuação", False, (0, 0, 0)),
-            (700,100)
+            pygame.font.SysFont('Comic Sans MS', 35).render("Pontuação:", False, (0, 0, 0)),
+            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 100)
         )
 
         # Texto da soma dos valores
         self.TELA.blit(
-            pygame.font.SysFont('Comic Sans MS', 40).render("Soma dos valores", False, (0, 0, 0)),
-            (700,200)
+            pygame.font.SysFont('Comic Sans MS', 35).render("Soma dos valores:", False, (0, 0, 0)),
+            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 200)
         )
         
         pygame.display.update()
@@ -53,6 +73,16 @@ class Jogo:
         )
         
         self.gerarBolasVertical(X_BOLAS, 120, 40)
+
+    def gerarTorresHorizontais(self, X_RECT, X_BOLAS):
+        
+        pygame.draw.rect(
+            self.TELA, 
+            (0, 0, 0, 0), 
+            [X_RECT, 470, 750, 100]
+        )
+    
+        self.gerarBolasHorizontal(X_BOLAS,520,40)
 
     def gerarBolasVertical(self, X, Y, diametro):
         
