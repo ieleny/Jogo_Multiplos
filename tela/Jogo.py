@@ -73,12 +73,24 @@ class Jogo:
             X += 120
 
     def cliqueBolas(self, event):
-        for item in range(9):
             # Verifica se a posição é do botão
-            if self.listaBolasClicaveis[item].collidepoint(event.pos):
-                # Transformar em um dicionário
-                print(self.ultimaBolaTorre[item].Largura, self.ultimaBolaTorre[item].Altura)
+            if self.listaBolasClicaveis[2].collidepoint(event.pos):
+                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.ultimaBolaTorre[2].Altura, self.ultimaBolaTorre[2].Largura], 55)
+                self.TELA.blit(
+                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.ultimaBolaTorre[2].NumeroBola), False, (0, 0, 0)),
+                    (self.ultimaBolaTorre[2].Altura - 10, self.ultimaBolaTorre[2].Largura - 25)
+                )
 
-                # TODO: Quando clicar irá adicionar a borda verde
-                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.ultimaBolaTorre[item].Altura, self.ultimaBolaTorre[item].Largura], 55)
-                pygame.display.flip()
+            if self.listaBolasClicaveis[5].collidepoint(event.pos):
+                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.ultimaBolaTorre[5].Altura, self.ultimaBolaTorre[5].Largura], 55)
+                self.TELA.blit(
+                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.ultimaBolaTorre[5].NumeroBola), False, (0, 0, 0)),
+                    (self.ultimaBolaTorre[5].Altura - 10, self.ultimaBolaTorre[5].Largura - 25)
+                )
+            
+            if self.listaBolasClicaveis[8].collidepoint(event.pos):
+                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.ultimaBolaTorre[8].Altura, self.ultimaBolaTorre[8].Largura], 55)
+                self.TELA.blit(
+                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.ultimaBolaTorre[8].NumeroBola), False, (0, 0, 0)),
+                    (self.ultimaBolaTorre[8].Altura - 10, self.ultimaBolaTorre[8].Largura - 25)
+                )
