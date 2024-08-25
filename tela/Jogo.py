@@ -6,9 +6,12 @@ from .ModeloTorresVerticais import ModeloTorresVerticais
 
 class Jogo:
 
-    # Salvar os dados
+    # Salvar dos objetos clicaveis
     listaBolasClicaveis = []
     bolasVerticais = []
+
+    # Salvar a pontuação
+    somaValores = 0
 
     # Eixos
     dicionarioTorres =   { 
@@ -18,7 +21,7 @@ class Jogo:
                             'torreHorizontal': { 'eixoXTorre': 100, 'eixoXBolas': 190 }
                         }
 
-    # Estudar raio e circuferência para saber qual o centro da bola
+    # Estudar raio e circuferência para saber qual o centro da bola, para colocar o número
 
     def __init__(self, TELA):
         self.TELA = TELA
@@ -61,8 +64,7 @@ class Jogo:
             pygame.font.SysFont('Comic Sans MS', 35).render("Soma dos valores:", False, (0, 0, 0)),
             (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 200)
         )
-        
-        pygame.display.update()
+    
 
     def gerarTorresVerticais(self, X_RECT, X_BOLAS):
         
@@ -82,7 +84,7 @@ class Jogo:
             [X_RECT, 470, 750, 100]
         )
     
-        self.gerarBolasHorizontal(X_BOLAS,520,40)
+        self.gerarBolasHorizontal(X_BOLAS, 520, 40)
 
     def gerarBolasVertical(self, X, Y, diametro):
         
@@ -132,6 +134,8 @@ class Jogo:
                     (self.bolasVerticais[2].Altura - 10, self.bolasVerticais[2].Largura - 25)
                 )
 
+                self.gerarTextoSomaValores(int(self.bolasVerticais[2].NumeroBola))
+
             if self.listaBolasClicaveis[5].collidepoint(event.pos):
                 pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.bolasVerticais[5].Altura, self.bolasVerticais[5].Largura], 45)
                 pygame.draw.circle(
@@ -144,6 +148,8 @@ class Jogo:
                     pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[5].NumeroBola), False, (0, 0, 0)),
                     (self.bolasVerticais[5].Altura - 10, self.bolasVerticais[5].Largura - 25)
                 )
+
+                self.gerarTextoSomaValores(int(self.bolasVerticais[5].NumeroBola))
             
             if self.listaBolasClicaveis[8].collidepoint(event.pos):
                 pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.bolasVerticais[8].Altura, self.bolasVerticais[8].Largura], 45)
@@ -157,3 +163,22 @@ class Jogo:
                     pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[8].NumeroBola), False, (0, 0, 0)),
                     (self.bolasVerticais[8].Altura - 10, self.bolasVerticais[8].Largura - 25)
                 )
+
+                self.gerarTextoSomaValores(int(self.bolasVerticais[8].NumeroBola))
+
+    def gerarTextoSomaValores(self, valor):
+
+        font = pygame.font.SysFont('Comic Sans MS', 35)
+        self.somaValores = int(self.somaValores) + int(valor)
+        
+        # Texto da soma dos valores
+        pygame.draw.circle(
+            self.TELA, 
+            CoresModel.BRANCO, 
+            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 280), 
+            40
+        )
+        self.TELA.blit(
+            font.render(str(self.somaValores), False, (0, 0, 0)),
+            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
+        )
