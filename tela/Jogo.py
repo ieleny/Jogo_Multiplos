@@ -90,7 +90,7 @@ class Jogo:
         
         for item in range(3):
 
-            NUMERO_ATUAL = str(randrange(10))
+            NUMERO_ATUAL = str(randrange(1, 10))
 
             modeloTorresVerticais = ModeloTorresVerticais(1, NUMERO_ATUAL, X, Y)
 
@@ -114,7 +114,7 @@ class Jogo:
                 diametro
             )
             self.TELA.blit(
-                pygame.font.SysFont('Comic Sans MS', 40).render(str(randrange(10)), False, (0, 0, 0)),
+                pygame.font.SysFont('Comic Sans MS', 40).render(str(randrange(1, 10)), False, (0, 0, 0)),
                 (X-10,Y-25)
             )
             X += 120
