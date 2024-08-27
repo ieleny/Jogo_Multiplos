@@ -2,16 +2,23 @@ import pygame
 from pygame.locals import *
 from random import *
 from .CoresModel import CoresModel
-from .ModeloTorresVerticais import ModeloTorresVerticais
+from .ModeloTorres import ModeloTorres
 
 class Jogo:
 
-    # Salvar dos objetos clicaveis
-    listaBolasClicaveis = []
+    # Salvar dos objetos clicaveis - Vertical
+    listaBolasClicaveisVerticais = []
     bolasVerticais = []
 
-    # Salvar a pontuação
+    # Salvar os objetos clicaveis - Horizontais
+    listaBolasClicaveisHorizontais = []
+    bolasHorizontais = []
+
+    # Salvar a soma dos valores
     somaValores = 0
+
+    # Salvar a pontuação do jogo
+    pontuacao = 0
 
     # Eixos
     dicionarioTorres =   { 
@@ -67,7 +74,7 @@ class Jogo:
     
 
     def gerarTorresVerticais(self, X_RECT, X_BOLAS):
-        
+
         pygame.draw.rect(
             self.TELA, 
             (0, 0, 0, 0), 
@@ -92,10 +99,11 @@ class Jogo:
 
             NUMERO_ATUAL = str(randrange(1, 10))
 
-            modeloTorresVerticais = ModeloTorresVerticais(1, NUMERO_ATUAL, X, Y)
-
-            self.bolasVerticais.append(modeloTorresVerticais)
-            self.listaBolasClicaveis.append(pygame.Rect(X, Y, 300, 300))
+            if item == 2:
+                modeloTorresVerticais = ModeloTorres('vertical', NUMERO_ATUAL, X, Y)
+                self.bolasVerticais.append(modeloTorresVerticais)
+                # pygame.rect defini o local que o valor poderá ser clicado
+                self.listaBolasClicaveisVerticais.append(pygame.Rect(X-40, Y-40, 80, 80))
 
             pygame.draw.circle(self.TELA, CoresModel.VERMELHO, [X, Y], diametro)
             self.TELA.blit(
@@ -106,70 +114,69 @@ class Jogo:
             Y += 120
 
     def gerarBolasHorizontal(self, X, Y, diametro):
+
         for item in range(6):
+
+            NUMERO_ATUAL = str(randrange(1, 10))
+
+            modeloTorresHorizonais = ModeloTorres('horizontal', NUMERO_ATUAL, X, Y)
+            self.bolasHorizontais.append(modeloTorresHorizonais)
+            self.listaBolasClicaveisHorizontais.append(pygame.Rect(X, Y, 300, 300))
+
             pygame.draw.circle(
                 self.TELA, 
                 CoresModel.VERMELHO, 
                 [X, Y], 
                 diametro
             )
+
             self.TELA.blit(
-                pygame.font.SysFont('Comic Sans MS', 40).render(str(randrange(1, 10)), False, (0, 0, 0)),
+                pygame.font.SysFont('Comic Sans MS', 40).render(NUMERO_ATUAL, False, (0, 0, 0)),
                 (X-10,Y-25)
             )
+
             X += 120
 
     def cliqueBolas(self, event):
-            # Verifica se a posição é do botão
-            if self.listaBolasClicaveis[2].collidepoint(event.pos):
-                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.bolasVerticais[2].Altura, self.bolasVerticais[2].Largura], 45)
-                pygame.draw.circle(
-                    self.TELA, 
-                    CoresModel.VERMELHO, 
-                    [self.bolasVerticais[2].Altura, self.bolasVerticais[2].Largura], 
-                    40
-                )
-                self.TELA.blit(
-                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[2].NumeroBola), False, (0, 0, 0)),
-                    (self.bolasVerticais[2].Altura - 10, self.bolasVerticais[2].Largura - 25)
-                )
 
-                self.gerarTextoSomaValores(int(self.bolasVerticais[2].NumeroBola))
+        if self.listaBolasClicaveisVerticais[0].collidepoint(event.pos):
+            self.gerarTextoCliqueBolas(0)
 
-            if self.listaBolasClicaveis[5].collidepoint(event.pos):
-                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.bolasVerticais[5].Altura, self.bolasVerticais[5].Largura], 45)
-                pygame.draw.circle(
-                    self.TELA, 
-                    CoresModel.VERMELHO, 
-                    [self.bolasVerticais[5].Altura, self.bolasVerticais[5].Largura], 
-                    40
-                )
-                self.TELA.blit(
-                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[5].NumeroBola), False, (0, 0, 0)),
-                    (self.bolasVerticais[5].Altura - 10, self.bolasVerticais[5].Largura - 25)
-                )
+        if self.listaBolasClicaveisVerticais[1].collidepoint(event.pos):
+            self.gerarTextoCliqueBolas(1)
+        
+        if self.listaBolasClicaveisVerticais[2].collidepoint(event.pos):
+            self.gerarTextoCliqueBolas(2)
 
-                self.gerarTextoSomaValores(int(self.bolasVerticais[5].NumeroBola))
-            
-            if self.listaBolasClicaveis[8].collidepoint(event.pos):
-                pygame.draw.circle(self.TELA, CoresModel.VERDE, [self.bolasVerticais[8].Altura, self.bolasVerticais[8].Largura], 45)
-                pygame.draw.circle(
-                    self.TELA, 
-                    CoresModel.VERMELHO, 
-                    [self.bolasVerticais[8].Altura, self.bolasVerticais[8].Largura], 
-                    40
-                )
-                self.TELA.blit(
-                    pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[8].NumeroBola), False, (0, 0, 0)),
-                    (self.bolasVerticais[8].Altura - 10, self.bolasVerticais[8].Largura - 25)
-                )
+    def gerarTextoCliqueBolas(self, index):
+        pygame.draw.circle(
+                        self.TELA, 
+                        CoresModel.VERDE, 
+                        [self.bolasVerticais[index].EixoX, self.bolasVerticais[index].EixoY], 
+                        45
+        )
+        pygame.draw.circle(
+            self.TELA, 
+            CoresModel.VERMELHO, 
+            [self.bolasVerticais[index].EixoX, self.bolasVerticais[index].EixoY], 
+            40
+        )
+        self.TELA.blit(
+            pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[index].NumeroBola), False, (0, 0, 0)),
+            (self.bolasVerticais[index].EixoX - 10, self.bolasVerticais[index].EixoY - 25)
+        )
 
-                self.gerarTextoSomaValores(int(self.bolasVerticais[8].NumeroBola))
+        self.gerarTextoSomaValores(self.bolasVerticais[index].NumeroBola)
 
     def gerarTextoSomaValores(self, valor):
 
         font = pygame.font.SysFont('Comic Sans MS', 35)
-        self.somaValores = int(self.somaValores) + int(valor)
+
+        print("1", self.somaValores + 1)
+
+        self.somaValores += int(valor)
+
+        print("2", self.somaValores)
         
         # Texto da soma dos valores
         pygame.draw.circle(
@@ -178,6 +185,7 @@ class Jogo:
             (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 280), 
             40
         )
+
         self.TELA.blit(
             font.render(str(self.somaValores), False, (0, 0, 0)),
             (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
