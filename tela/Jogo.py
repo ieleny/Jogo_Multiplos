@@ -7,12 +7,12 @@ from .ModeloTorres import ModeloTorres
 class Jogo:
 
     # Salvar dos objetos clicaveis - Vertical
-    listaBolasClicaveisVerticais = []
-    bolasVerticais = []
+    listaOrbesClicaveisVerticais = []
+    orbesVerticais = []
 
     # Salvar os objetos clicaveis - Horizontais
-    listaBolasClicaveisHorizontais = []
-    bolasHorizontais = []
+    listaOrbesClicaveisHorizontais = []
+    orbesHorizontais = []
 
     # Salvar a soma dos valores
     somaValores = 0
@@ -95,15 +95,17 @@ class Jogo:
 
     def gerarBolasVertical(self, X, Y, diametro):
         
-        for item in range(3):
+        for index in range(3):
 
             NUMERO_ATUAL = str(randrange(1, 10))
 
-            if item == 2:
+            # Só salvar se o index for 2, que significa que é o última orbe da torre
+            if index == 2:
+                # Salvar o objeto da torre vertical com seus dados, do número atual, eixo x e eixo y
                 modeloTorresVerticais = ModeloTorres('vertical', NUMERO_ATUAL, X, Y)
-                self.bolasVerticais.append(modeloTorresVerticais)
+                self.orbesVerticais.append(modeloTorresVerticais)
                 # pygame.rect defini o local que o valor poderá ser clicado
-                self.listaBolasClicaveisVerticais.append(pygame.Rect(X-40, Y-40, 80, 80))
+                self.listaOrbesClicaveisVerticais.append(pygame.Rect(X-40, Y-40, 80, 80))
 
             pygame.draw.circle(self.TELA, CoresModel.VERMELHO, [X, Y], diametro)
             self.TELA.blit(
@@ -120,8 +122,8 @@ class Jogo:
             NUMERO_ATUAL = str(randrange(1, 10))
 
             modeloTorresHorizonais = ModeloTorres('horizontal', NUMERO_ATUAL, X, Y)
-            self.bolasHorizontais.append(modeloTorresHorizonais)
-            self.listaBolasClicaveisHorizontais.append(pygame.Rect(X, Y, 300, 300))
+            self.orbesHorizontais.append(modeloTorresHorizonais)
+            self.listaOrbesClicaveisHorizontais.append(pygame.Rect(X - 40, Y - 40, 80, 80))
 
             pygame.draw.circle(
                 self.TELA, 
@@ -129,7 +131,6 @@ class Jogo:
                 [X, Y], 
                 diametro
             )
-
             self.TELA.blit(
                 pygame.font.SysFont('Comic Sans MS', 40).render(NUMERO_ATUAL, False, (0, 0, 0)),
                 (X-10,Y-25)
@@ -138,37 +139,54 @@ class Jogo:
             X += 120
 
     def cliqueOrbes(self, event):
-        if self.listaBolasClicaveisVerticais[0].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(0)
+        # Compara se a orbe vertical, está no mesmo ponto que o mouse
+        if self.listaOrbesClicaveisVerticais[0].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesVerticais[0])
 
-        if self.listaBolasClicaveisVerticais[1].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(1)
+        if self.listaOrbesClicaveisVerticais[1].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesVerticais[1])
         
-        if self.listaBolasClicaveisVerticais[2].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(2)
+        if self.listaOrbesClicaveisVerticais[2].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesVerticais[2])
 
-        if self.listaBolasClicaveisHorizontais[2].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(2)
+        # Compara se a orbe horizon, está no mesmo ponto que o mouse
+        if self.listaOrbesClicaveisHorizontais[0].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesHorizontais[0])
+        
+        if self.listaOrbesClicaveisHorizontais[1].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesHorizontais[1])
+        
+        if self.listaOrbesClicaveisHorizontais[2].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesHorizontais[2])
+        
+        if self.listaOrbesClicaveisHorizontais[3].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesHorizontais[3])
+        
+        if self.listaOrbesClicaveisHorizontais[4].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesHorizontais[4])
+        
+        if self.listaOrbesClicaveisHorizontais[5].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(self.orbesHorizontais[5])
 
-    def gerarTextoCliqueOrbes(self, index):
+    def gerarTextoCliqueOrbes(self, orbes):
         pygame.draw.circle(
                         self.TELA, 
                         CoresModel.VERDE, 
-                        [self.bolasVerticais[index].EixoX, self.bolasVerticais[index].EixoY], 
+                        [orbes.EixoX, orbes.EixoY], 
                         45
         )
         pygame.draw.circle(
             self.TELA, 
             CoresModel.VERMELHO, 
-            [self.bolasVerticais[index].EixoX, self.bolasVerticais[index].EixoY], 
+            [orbes.EixoX, orbes.EixoY], 
             40
         )
         self.TELA.blit(
-            pygame.font.SysFont('Comic Sans MS', 40).render(str(self.bolasVerticais[index].NumeroBola), False, (0, 0, 0)),
-            (self.bolasVerticais[index].EixoX - 10, self.bolasVerticais[index].EixoY - 25)
+            pygame.font.SysFont('Comic Sans MS', 40).render(str(orbes.NumeroBola), False, (0, 0, 0)),
+            (orbes.EixoX - 10, orbes.EixoY - 25)
         )
 
-        self.gerarTextoSomaValores(self.bolasVerticais[index].NumeroBola)
+        self.gerarTextoSomaValores(orbes.NumeroBola)
 
     def gerarTextoSomaValores(self, valor):
 
