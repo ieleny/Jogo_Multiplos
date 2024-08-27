@@ -30,9 +30,8 @@ class Menu:
         self.TELA.blit(text, textRect)
 
     # Função desenha elementos do Jogo
-    def inicioJogo(self, event):
+    def inicioJogo(self, event, jogo):
         # Verifica se a posição é do botão
         if self.botao.collidepoint(event.pos):
-            jogo = Jogo(self.TELA)
             self.TELA.fill(CoresModel.BRANCO)
             jogo.telaDoJogo()

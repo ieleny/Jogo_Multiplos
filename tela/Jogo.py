@@ -137,18 +137,20 @@ class Jogo:
 
             X += 120
 
-    def cliqueBolas(self, event):
-
+    def cliqueOrbes(self, event):
         if self.listaBolasClicaveisVerticais[0].collidepoint(event.pos):
-            self.gerarTextoCliqueBolas(0)
+            self.gerarTextoCliqueOrbes(0)
 
         if self.listaBolasClicaveisVerticais[1].collidepoint(event.pos):
-            self.gerarTextoCliqueBolas(1)
+            self.gerarTextoCliqueOrbes(1)
         
         if self.listaBolasClicaveisVerticais[2].collidepoint(event.pos):
-            self.gerarTextoCliqueBolas(2)
+            self.gerarTextoCliqueOrbes(2)
 
-    def gerarTextoCliqueBolas(self, index):
+        if self.listaBolasClicaveisHorizontais[2].collidepoint(event.pos):
+            self.gerarTextoCliqueOrbes(2)
+
+    def gerarTextoCliqueOrbes(self, index):
         pygame.draw.circle(
                         self.TELA, 
                         CoresModel.VERDE, 
@@ -172,11 +174,7 @@ class Jogo:
 
         font = pygame.font.SysFont('Comic Sans MS', 35)
 
-        print("1", self.somaValores + 1)
-
         self.somaValores += int(valor)
-
-        print("2", self.somaValores)
         
         # Texto da soma dos valores
         pygame.draw.circle(

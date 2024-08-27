@@ -22,6 +22,7 @@ class Tela:
         pygame.init()
 
         menu = Menu(self.TELA)
+        jogo = Jogo(self.TELA)
         
         # Adicionar cor na tela
         self.TELA.fill(CoresModel.CINZA)
@@ -36,10 +37,10 @@ class Tela:
                     pygame.quit()
                     sys.exit()
                 elif event.type == MOUSEBUTTONDOWN and clicouBotaoInicioJogo == False:
-                    menu.inicioJogo(event)
+                    menu.inicioJogo(event, jogo)
                     clicouBotaoInicioJogo = True
                 elif event.type == MOUSEBUTTONDOWN:
-                    jogo = Jogo(self.TELA)
+                    print("bolasVerticais", jogo.bolasVerticais)
                     jogo.cliqueBolas(event)
             pygame.display.update()
         
