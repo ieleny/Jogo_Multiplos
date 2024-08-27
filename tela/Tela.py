@@ -40,7 +40,6 @@ class Tela:
                     menu.inicioJogo(event, jogo)
                     clicouBotaoInicioJogo = True
                 elif event.type == MOUSEBUTTONDOWN:
-                    print("bolasVerticais", jogo.bolasVerticais)
-                    jogo.cliqueBolas(event)
+                    jogo.cliqueOrbes(event)
             pygame.display.update()
         
