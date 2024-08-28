@@ -14,6 +14,9 @@ class Jogo:
     listaOrbesClicaveisHorizontais = []
     orbesHorizontais = []
 
+    # Salvar os objetos que foram marcados
+    listaOrbesClicados = []
+
     # Salvar a soma dos valores
     somaValores = 0
 
@@ -139,70 +142,124 @@ class Jogo:
             X += 120
 
     def cliqueOrbes(self, event):
+
         # Compara se a orbe vertical, está no mesmo ponto que o mouse
         if self.listaOrbesClicaveisVerticais[0].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesVerticais[0])
+            self.gerarCliqueOrbes(self.orbesVerticais[0])
 
         if self.listaOrbesClicaveisVerticais[1].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesVerticais[1])
+            self.gerarCliqueOrbes(self.orbesVerticais[1])
         
         if self.listaOrbesClicaveisVerticais[2].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesVerticais[2])
+            self.gerarCliqueOrbes(self.orbesVerticais[2])
 
         # Compara se a orbe horizon, está no mesmo ponto que o mouse
         if self.listaOrbesClicaveisHorizontais[0].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesHorizontais[0])
+            self.gerarCliqueOrbes(self.orbesHorizontais[0])
         
         if self.listaOrbesClicaveisHorizontais[1].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesHorizontais[1])
+            self.gerarCliqueOrbes(self.orbesHorizontais[1])
         
         if self.listaOrbesClicaveisHorizontais[2].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesHorizontais[2])
+            self.gerarCliqueOrbes(self.orbesHorizontais[2])
         
         if self.listaOrbesClicaveisHorizontais[3].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesHorizontais[3])
+            self.gerarCliqueOrbes(self.orbesHorizontais[3])
         
         if self.listaOrbesClicaveisHorizontais[4].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesHorizontais[4])
+            self.gerarCliqueOrbes(self.orbesHorizontais[4])
         
         if self.listaOrbesClicaveisHorizontais[5].collidepoint(event.pos):
-            self.gerarTextoCliqueOrbes(self.orbesHorizontais[5])
+            self.gerarCliqueOrbes(self.orbesHorizontais[5])
 
-    def gerarTextoCliqueOrbes(self, orbes):
-        pygame.draw.circle(
-                        self.TELA, 
-                        CoresModel.VERDE, 
-                        [orbes.EixoX, orbes.EixoY], 
-                        45
-        )
-        pygame.draw.circle(
-            self.TELA, 
-            CoresModel.VERMELHO, 
-            [orbes.EixoX, orbes.EixoY], 
-            40
-        )
-        self.TELA.blit(
-            pygame.font.SysFont('Comic Sans MS', 40).render(str(orbes.NumeroBola), False, (0, 0, 0)),
-            (orbes.EixoX - 10, orbes.EixoY - 25)
-        )
-
-        self.gerarTextoSomaValores(orbes.NumeroBola)
-
-    def gerarTextoSomaValores(self, valor):
-
+    def gerarCliqueOrbes(self, orbe):
         font = pygame.font.SysFont('Comic Sans MS', 35)
 
-        self.somaValores += int(valor)
-        
-        # Texto da soma dos valores
-        pygame.draw.circle(
-            self.TELA, 
-            CoresModel.BRANCO, 
-            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 280), 
-            40
-        )
+        # Somar os valores
+        self.somaValores += int(orbe.NumeroBola)
 
-        self.TELA.blit(
-            font.render(str(self.somaValores), False, (0, 0, 0)),
-            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
-        )
+        # Verificar se a listaOrbesClicados tem 3 na lista
+        if len(self.listaOrbesClicados) == 2:
+            for item in self.listaOrbesClicados:
+                pygame.draw.circle(
+                    self.TELA, 
+                    CoresModel.VERMELHO, 
+                    [item.EixoX, item.EixoY], 
+                    45
+                )
+                pygame.draw.circle(
+                    self.TELA, 
+                    CoresModel.VERMELHO, 
+                    [item.EixoX, item.EixoY], 
+                    40
+                )
+                self.TELA.blit(
+                    pygame.font.SysFont('Comic Sans MS', 40).render(
+                        str(item.NumeroBola), 
+                        False, 
+                        (0, 0, 0)
+                    ),
+                    (item.EixoX - 10, item.EixoY - 25)
+                )
+
+        
+        # Quando o resto da soma de valores for igual a 0, irá atualizar os valores e 
+        if self.somaValores % 5 == 0:
+            self.somaValores = 0
+            
+            pygame.draw.circle(
+                self.TELA, 
+                CoresModel.VERMELHO, 
+                [orbe.EixoX, orbe.EixoY], 
+                45
+            )
+
+            # Limpar as orbes marcadas
+
+            #self.gerarBolasVertical(
+                #self.dicionarioTorres['primeiraTorreVertical']['eixoXBolas'], 
+                #120, 
+                #40
+            #)
+            
+        else:
+            # Adicionar as orbes selecionadas
+            self.listaOrbesClicados.append(orbe)
+            
+            # Adicionar a borda no clique
+            pygame.draw.circle(
+                self.TELA, 
+                CoresModel.VERDE, 
+                [orbe.EixoX, orbe.EixoY], 
+                45
+            )
+            pygame.draw.circle(
+                self.TELA, 
+                CoresModel.VERMELHO, 
+                [orbe.EixoX, orbe.EixoY], 
+                40
+            )
+            self.TELA.blit(
+                pygame.font.SysFont('Comic Sans MS', 40).render(
+                    str(orbe.NumeroBola), 
+                    False, 
+                    (0, 0, 0)
+                ),
+                (orbe.EixoX - 10, orbe.EixoY - 25)
+            )
+
+            # Adicionar os valores na variavel na soma dos valores
+            pygame.draw.circle(
+                self.TELA, 
+                CoresModel.BRANCO, 
+                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 280), 
+                40
+            )
+            self.TELA.blit(
+                font.render(
+                    str(self.somaValores), 
+                    False, 
+                    (0, 0, 0)
+                ),
+                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
+            )
