@@ -178,8 +178,68 @@ class Jogo:
         # Somar os valores
         self.somaValores += int(orbe.NumeroBola)
 
-        # Verificar se a listaOrbesClicados tem 3 na lista
-        if len(self.listaOrbesClicados) == 2:
+        print("--------------------------------------" )
+        print("if", len(self.listaOrbesClicados) == 2 and self.somaValores % 5 != 0)
+        print("quantidade", len(self.listaOrbesClicados) == 2)
+        print("resto", self.somaValores % 5 != 0)
+        print("O resto é 0", self.somaValores % 5 == 0)
+        print("somaValores", self.somaValores)
+        print("--------------------------------------" )
+
+        # Verificar se a listaOrbesClicados tem 3 na lista e o resto da soma de valores
+        if len(self.listaOrbesClicados) == 2 and self.somaValores % 5 != 0:
+            self.somaValores = 0
+
+            for item in self.listaOrbesClicados:
+                pygame.draw.circle(
+                    self.TELA, 
+                    CoresModel.VERMELHO, 
+                    [item.EixoX, item.EixoY], 
+                    45
+                )
+                pygame.draw.circle(
+                    self.TELA, 
+                    CoresModel.VERMELHO, 
+                    [item.EixoX, item.EixoY], 
+                    40
+                )
+                self.TELA.blit(
+                    pygame.font.SysFont('Comic Sans MS', 40).render(
+                        str(item.NumeroBola), 
+                        False, 
+                        (0, 0, 0)
+                    ),
+                    (item.EixoX - 10, item.EixoY - 25)
+                )
+            
+            # Atualizar o soma de valores
+            pygame.draw.circle(
+                self.TELA, 
+                CoresModel.BRANCO, 
+                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 280), 
+                40
+            )
+            self.TELA.blit(
+                font.render(
+                    str(self.somaValores), 
+                    False, 
+                    (0, 0, 0)
+                ),
+                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
+            )
+
+        # Quando o resto da soma de valores for igual a 0, irá atualizar os valores e 
+        if self.somaValores % 5 == 0:
+            self.somaValores = 0
+            
+            pygame.draw.circle(
+                self.TELA, 
+                CoresModel.VERMELHO, 
+                [orbe.EixoX, orbe.EixoY], 
+                45
+            )
+
+            # Limpa a as orbes
             for item in self.listaOrbesClicados:
                 pygame.draw.circle(
                     self.TELA, 
@@ -202,20 +262,7 @@ class Jogo:
                     (item.EixoX - 10, item.EixoY - 25)
                 )
 
-        
-        # Quando o resto da soma de valores for igual a 0, irá atualizar os valores e 
-        if self.somaValores % 5 == 0:
-            self.somaValores = 0
-            
-            pygame.draw.circle(
-                self.TELA, 
-                CoresModel.VERMELHO, 
-                [orbe.EixoX, orbe.EixoY], 
-                45
-            )
-
-            # Limpar as orbes marcadas
-
+            # Gerar as orbes marcadas
             #self.gerarBolasVertical(
                 #self.dicionarioTorres['primeiraTorreVertical']['eixoXBolas'], 
                 #120, 
@@ -248,7 +295,7 @@ class Jogo:
                 (orbe.EixoX - 10, orbe.EixoY - 25)
             )
 
-            # Adicionar os valores na variavel na soma dos valores
+            # Atualizar o soma de valores
             pygame.draw.circle(
                 self.TELA, 
                 CoresModel.BRANCO, 
