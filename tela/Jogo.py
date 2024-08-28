@@ -228,6 +228,9 @@ class Jogo:
                 (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
             )
 
+            # Limpar as variaveis
+            self.listaOrbesClicados.clear()
+
         # Quando o resto da soma de valores for igual a 0, irá atualizar os valores e 
         if self.somaValores % 5 == 0:
             self.somaValores = 0
