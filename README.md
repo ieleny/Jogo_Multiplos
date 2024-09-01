@@ -68,5 +68,3 @@ A pontuação será calculada da seguinte forma:
 | ---   | ----      |
 | 5     |  1        |
 | 10    |  2        |
-
-Será de acordo com a tábuada, qual o valor que irá calcular, que terá o valor igual a 5 na tábuada de 5, é o 1, essa será a pontução.
