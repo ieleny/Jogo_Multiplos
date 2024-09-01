@@ -188,6 +188,9 @@ class Jogo:
 
         # Verificar se a listaOrbesClicados tem 3 na lista e o resto da soma de valores
         if len(self.listaOrbesClicados) == 2 and self.somaValores % 5 != 0:
+
+            print("Primeiro if", self.somaValores)
+
             self.somaValores = 0
 
             for item in self.listaOrbesClicados:
@@ -212,36 +215,18 @@ class Jogo:
                     (item.EixoX - 10, item.EixoY - 25)
                 )
             
-            # Atualizar o soma de valores
-            pygame.draw.circle(
-                self.TELA, 
-                CoresModel.BRANCO, 
-                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 280), 
-                40
-            )
-            self.TELA.blit(
-                font.render(
-                    str(self.somaValores), 
-                    False, 
-                    (0, 0, 0)
-                ),
-                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
-            )
+            self.atualizaNumeroSomaValores()
 
             # Limpar as variaveis
             self.listaOrbesClicados.clear()
 
         # Quando o resto da soma de valores for igual a 0, irá atualizar os valores e 
         if self.somaValores % 5 == 0:
+            print("Segundo if", self.pontuacao)
+
+            self.pontuacao = self.pontuacao + self.somaValores // 5 * 1
             self.somaValores = 0
             
-            pygame.draw.circle(
-                self.TELA, 
-                CoresModel.VERMELHO, 
-                [orbe.EixoX, orbe.EixoY], 
-                45
-            )
-
             # Limpa a as orbes
             for item in self.listaOrbesClicados:
                 pygame.draw.circle(
@@ -265,14 +250,12 @@ class Jogo:
                     (item.EixoX - 10, item.EixoY - 25)
                 )
 
-            # Gerar as orbes marcadas
-            #self.gerarBolasVertical(
-                #self.dicionarioTorres['primeiraTorreVertical']['eixoXBolas'], 
-                #120, 
-                #40
-            #)
+            self.atualizaNumeroSomaValores()
+            self.atualizaNumeroPontuacao()
             
         else:
+            print("Terceiro if", self.somaValores)
+
             # Adicionar as orbes selecionadas
             self.listaOrbesClicados.append(orbe)
             
@@ -298,18 +281,54 @@ class Jogo:
                 (orbe.EixoX - 10, orbe.EixoY - 25)
             )
 
-            # Atualizar o soma de valores
-            pygame.draw.circle(
-                self.TELA, 
-                CoresModel.BRANCO, 
-                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 280), 
-                40
-            )
+            self.atualizaNumeroSomaValores()
+
+    def atualizaNumeroSomaValores(self):
+        font = pygame.font.SysFont('Comic Sans MS', 35)
+
+        pygame.draw.circle(
+            self.TELA, 
+            CoresModel.BRANCO, 
+            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 280), 
+            40
+        )
+        
+        self.TELA.blit(
+            font.render(
+                str(self.somaValores), 
+                False, 
+                (0, 0, 0)
+            ),
+            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
+        )
+
+    def atualizaNumeroPontuacao(self):
+        font = pygame.font.SysFont('Comic Sans MS', 35)
+
+        pygame.draw.circle(
+            self.TELA, 
+            CoresModel.BRANCO, 
+            (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 120, 175), 
+            30
+        )
+
+        if self.pontuacao <= 10: 
             self.TELA.blit(
                 font.render(
-                    str(self.somaValores), 
+                    str(self.pontuacao), 
                     False, 
                     (0, 0, 0)
                 ),
-                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 250)
+                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 150)
             )
+        
+        else:
+            self.TELA.blit(
+                font.render(
+                    "Você ganhou!!!", 
+                    False, 
+                    CoresModel.AZUL
+                ),
+                (self.dicionarioTorres['terceiraTorreVerical']['eixoXBolas'] + 100, 150)
+            )
+
