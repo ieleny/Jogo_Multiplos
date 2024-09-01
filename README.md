@@ -2,6 +2,10 @@
 
 Jogo aonde voce precisa descobrir se o numero é multiplos ou não do numero correspondente.
 
+Versão 1:
+
+https://github.com/user-attachments/assets/08adbe3b-6008-4a20-a9f7-121eebfc6ceb
+
 # Executar o projeto
 
 # Executar o projeto linux
